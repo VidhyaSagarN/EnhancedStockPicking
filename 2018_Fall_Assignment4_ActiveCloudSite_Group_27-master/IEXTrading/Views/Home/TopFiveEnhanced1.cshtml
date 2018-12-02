@@ -1,0 +1,82 @@
+﻿@model IEXTrading.Models.ViewModel.TopFiveEnhancedModelView
+<h2>Top 5 Company stocks (Enhanced) using 5 year historic data</h2>
+
+@if (Model != null)
+{
+    var i = 0;
+    foreach (var stockData in Model.GraphData)
+    {
+
+        var equity = stockData.Current;
+        <hr />
+        <table border="1" align="center">
+            <tbody>
+                <tr>
+                    <td>
+                        Current chart data for top 5 stocks as per 5 year historic data
+                        <table border="1" align="center">
+                            <tr>
+                                <td>
+                                    Symbol
+                                </td>
+                                <td>
+                                    @equity.symbol
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Open
+                                </td>
+                                <td>
+                                    @equity.open
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    High
+                                </td>
+                                <td>
+                                    @equity.high
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Close
+                                </td>
+                                <td>
+                                    @equity.close
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Volume
+                                </td>
+                                <td>
+                                    @equity.volume
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <div>
+                            <canvas id="chartId_@i" height="500" width="800"></canvas>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            getChartForTopStocks("@stockData.Dates", "@stockData.Prices", "@stockData.Volumes", @stockData.AvgPrice, @stockData.AvgVolume,"chartId_@i");
+        </script>
+        i = i + 1;
+    }
+
+
+}
+<table align="center">
+    <tr>
+        <td>
+            <a id="dbopt" asp-controller="Home" asp-action="SaveEnhanced5yrData"><img src="~/images/button_save-data.png" /></a>
+        </td>
+    </tr>
+</table>

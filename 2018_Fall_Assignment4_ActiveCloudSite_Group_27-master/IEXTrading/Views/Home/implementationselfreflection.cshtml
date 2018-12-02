@@ -1,0 +1,127 @@
+﻿@{
+    ViewData["Title"] = "implementationselfreflection";
+}
+<h2>IEX Trading Application</h2>
+<hr />
+<h2>Implementation</h2>
+<hr />
+<div>
+    <p>
+        We explored IEX Trading website and the GitHub code shared by the professor for getting insights about the stocks and the MVC model.
+        After researching and brainstorming about it, we took Infocus stocks into consideration from IEX Trading website.
+        <br />
+    <p>
+        <hr />
+        <h2>InFocus Strategy 1 - InFocus stocks from booming market</h2>
+        <hr />
+        Infocus stocks from IEX Trading are the stocks that are having a high level of performance in the stock market over a stretch in a particular period.
+        This gave us basic idea on how to narrow down to top stocks based on certain parameters as markethigh, marketlow, high, low and other associated factors.
+        This information gave us the best results about which were the top 5 stocks in last week that had the best performance amongst other stocks.
+        The main factors which were taken into consideration for the deciding factor were exchange rate, industry or domain it belonged to, percentage change it had the most in that period and age of the stock.
+        A Comprehensive factor was derived based on average over a stretch and top 5 were determined.
+
+        <br />
+        Additionally, To increase the performance we have stored and retrieved top 5 data in session as below:
+        <br />
+        String data = JsonConvert.SerializeObject(companies);
+        HttpContext.Session.SetString("Companies5", data);
+
+        string companiesDatafromsession = HttpContext.Session.GetString("Companies5");
+        List<CompanyInfo>
+            companies1 = null;
+            if (companiesDatafromsession != "")
+            {
+            companies1 = JsonConvert.DeserializeObject<List<CompanyInfo>>(companiesDatafromsession);
+            }
+    </p>
+    <br />
+    <p>
+        We created a new function in the controller which would extract all the stocks from the infocus stocks section of the page.
+        Then we programmed a model which would extract the required information from IEX Trading website.
+        After getting all the necessary information, we created a new function in the main controller for determining top 5 performing stocks during last week.
+        After getting top 5 stocks, we created a new view to display the best 5 stocks under new tab ‘Top 5 Stocks’ on the website.
+    </p>
+
+    <p>
+        <hr />
+        <h2>Enhanced Strategy 2 - 2 Year Historic stock data strategy</h2>
+        <hr />
+        <h3>We have optimized the code as much as possible to fast fetch the huge JSON response and process it by storing the data in session as session variable</h3>
+        We have used an API from IEX trading website to fecth 2 year stock data for a stock symbol and factors such as open, close, change, date and changepercent were considered to compute the top 5 stocks as per 2 year historic data.
+        This particular API gives the user a comprehensive details associated with a particular stock symbol passed for a given range.
+        The main factors which were taken into consideration for the deciding factor were exchange rate, industry or domain it belonged to, percentage change it had the most in that period and age of the stock. Top 5 stock symbols were calculated using comprehensive average over a period of 2 years.
+        This way we can ensure that legacy data can be put into use to determine best fit stocks.
+    </p>
+    <br />
+    <p>
+        We created a new function in the controller which would extract all the stocks from the historic 2 year stocks section of the page.
+        Then we programmed a new model which would extract the required information from IEX Trading website.
+        After getting all the necessary information, we created a new function in the main controller for determining top 5 performing stocks during last 2 years.
+        After getting top 5 stocks, we created a new view to display the best 5 stocks under new tab ‘Top 5 enhanced’ on the website.
+    </p>
+
+    <p>
+        <hr />
+        <h2>Enhanced Strategy 3 - 5 Year Historic stock data strategy</h2>
+        <hr />
+        <h3>Optimization is achieved to fast fetch the huge JSON response and process it using data in session as session variable - HttpContext.Session.SetString(SessionKeyName, CollectionData);</h3>
+        We have used an API from IEX trading website to fecth 5 year stock data for a stock symbol and factors such as open, close, change, date and changepercent were considered to compute the top 5 stocks as per 5 year historic data.
+        This particular API gives the user a comprehensive details associated with a particular stock symbol passed for a given range.
+        The main factors which were taken into consideration for the deciding factor were exchange rate, industry or domain it belonged to, percentage change it had the most in that period and age of the stock. Top 5 stock symbols were calculated using comprehensive average over a period of 5 years.
+        This way we can ensure that legacy data can be put into use to determine best fit stocks.
+    </p>
+    <br />
+    <p>
+        We created a new function in the controller which would extract all the stocks from the historic 5 year stocks section of the page.
+        Then we programmed a new model which would extract the required information from IEX Trading website.
+        After getting all the necessary information, we created a new function in the main controller for determining top 5 performing stocks during last 5 years.
+        After getting top 5 stocks, we created a new view to display the best 5 stocks under new tab ‘Top 5 enhanced1’ on the website.
+    </p>
+    </p>
+
+
+    <p>
+        <ul>
+            <hr />
+            <h2>Enhanced self reflection</h2>
+            <hr />
+            <li>We gained addtional knowledge on how to enhance the stock picking strategy using historic data</li>
+            <li>We gained comprehensive understanding on how to use huge JSON response, store and process it.</li>
+            <li>We gained  understanding on performance tuning. (Store the huge JSON data in session variable rather than pulling it again as fresh HTTP request)</li>
+            <li>We gained undertanding on how to use Microsoft cloud services to deploy the MVC web application with a data source as SQL server</li>
+            <li>This enhancement gave us the oppurtinity to explore more stock picking strategies as ROI(return on investment), CASH ROIC and many other market strategies.</li>
+            <li>We also gained undersanding on tweaking an existing MVC web application and scale it accordingly as per changing business needs.</li>
+            <hr />
+            <h2>Self Reflection</h2>
+            <hr />
+            <li>Learnt about MVC working pattern and control flows associated within MVC web application.</li>
+            <li>We also got an extensive hands on experience on HTML, CSS and JavaScript during this exercise.</li>
+            <li>Learnt how to consume an API supplied by a third party like IEXTrading and use it to model the web application and deliver value.</li>
+            <li>Learnt how to establish connections to databases through MVC web applications.</li>
+            <li>We had a comprehensive understanding on how stock pricing work and what basis the stocks are traded utilizing parameters such as open value, open time, close value, day low, volume and many other associated variables involved.</li>
+            <li>We gained additional knowledge on trading and stocks through below</li>
+            <ul>
+                <li>American association journal</li>
+                <li>Magic formula investing website</li>
+                <li>Investopedia</li>
+            </ul>
+
+        </ul>
+    </p>
+    <hr />
+    <h1>Challenges Faced : MaxFieldLength and MaxRequestBytes must be changed in case HTTP 400 : Bad Request </h1>
+    <hr />
+    <h3>
+        Resolution: Serialize the POCO into string and store it in a session and get the object stored in session and deserailize it into POCO to pass it to a view.<br />
+        String companiesData = JsonConvert.SerializeObject(topFiveData);
+        HttpContext.Session.SetString("top5enhanced", companiesData);
+
+        string companiesDatafromsession = HttpContext.Session.GetString("top5enhanced");
+        TopFiveEnhancedModelView companies = null;
+        if (companiesDatafromsession != "")
+        {
+        companies = JsonConvert.DeserializeObject<TopFiveEnhancedModelView>
+            (companiesDatafromsession);
+            }
+    </h3>
+</div>
